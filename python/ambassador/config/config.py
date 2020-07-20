@@ -130,6 +130,12 @@ class Config:
             self.statsd['interval'] = os.environ.get('STATSD_FLUSH_INTERVAL', '1')
 
             statsd_host = os.environ.get('STATSD_HOST', 'statsd-sink')
+            statsd_port = os.environ.get('STATSD_PORT', '8125')
+
+            # Testing - remove before upstream
+            self.logger.debug("statsd port found: {}".format(statsd_port))
+
+
             try:
                 resolved_ip = socket.gethostbyname(statsd_host)
                 self.statsd['ip'] = resolved_ip
